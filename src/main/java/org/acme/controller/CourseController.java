@@ -33,4 +33,11 @@ public class CourseController {
         courseService.add(courseCreateDto);
         return findAll();
     }
+
+    @DELETE
+    @Path("{name}/{edition}")
+    public Response delete(@PathParam("name") String name, @PathParam("edition") Integer edition) {
+        courseService.delete(name, edition);
+        return Response.ok().build();
+    }
 }

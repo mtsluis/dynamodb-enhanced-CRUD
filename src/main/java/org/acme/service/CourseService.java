@@ -3,18 +3,15 @@ package org.acme.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.entity.Course;
+import org.acme.entity.Person;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
-import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
-import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
-import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
-import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
 
-import java.util.HashMap;
+
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -25,7 +22,7 @@ public class CourseService {
     private DynamoDbTable<Course> courseTable;
 
     @Inject
-    void CourseEnhancedService(DynamoDbEnhancedClient dynamoEnhancedClient) {
+    void courseEnhancedService(DynamoDbEnhancedClient dynamoEnhancedClient) {
         courseTable = dynamoEnhancedClient.table(COURSE_TABLE_NAME, TableSchema.fromBean(Course.class));
     }
 
@@ -34,6 +31,7 @@ public class CourseService {
     }
 
     public List<Course> add(Course course) {
+        course.setTeacher(new Person(1L, "email@dasd.lol", "John", "Smith", "teacher", "jSmith", LocalDate.parse( "1990-02-12"), 0, "Never St., 123"));
         courseTable.putItem(course);
         return findAll();
     }
@@ -41,5 +39,10 @@ public class CourseService {
     public Course get(String name) {
         Key partitionKey = Key.builder().partitionValue(name).build();
         return courseTable.getItem(partitionKey);
+    }
+
+    public void delete(String name, Integer edition) {
+        Key key = Key.builder().partitionValue(name).sortValue(edition).build();
+        courseTable.deleteItem(key);
     }
 }

@@ -26,6 +26,18 @@ public class Person {
 
     private String address;
 
+    public Person(Long id, String email, String firstName, String lastName, String role, String username, LocalDate dateOfBirth, int age, String address) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.username = username;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+        this.address = address;
+    }
+
     public Person() {
     }
 
