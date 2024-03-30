@@ -3,7 +3,7 @@
 
 
 ### Instructions:
-1. Set up a Docker container with DynamoDB:
+1. Set up a Docker container to run a local DynamoDB:
 ```shell script
 docker run --publish 8000:8000 amazon/dynamodb-local:1.11.477 -jar DynamoDBLocal.jar -sharedDb
 ```
