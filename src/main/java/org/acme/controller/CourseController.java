@@ -23,9 +23,9 @@ public class CourseController {
     }
 
     @GET
-    @Path("{name}")
-    public Course getSingle(String name) {
-        return courseService.get(name);
+    @Path("{name}/{edition}")
+    public Course getSingle(@PathParam("name") String name, @PathParam("edition") Integer edition) {
+        return courseService.get(name, edition);
     }
 
     @POST
@@ -38,6 +38,6 @@ public class CourseController {
     @Path("{name}/{edition}")
     public Response delete(@PathParam("name") String name, @PathParam("edition") Integer edition) {
         courseService.delete(name, edition);
-        return Response.ok().build();
+        return Response.ok("Course deleted successfully.").build();
     }
 }

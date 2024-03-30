@@ -31,13 +31,15 @@ public class CourseService {
     }
 
     public List<Course> add(Course course) {
+        // This is just a dummy teacher, in a real application you could fetch the teacher from a teacher table, or create a new teacher in the json body of the request
         course.setTeacher(new Person(1L, "email@dasd.lol", "John", "Smith", "teacher", "jSmith", LocalDate.parse( "1990-02-12"), 0, "Never St., 123"));
+
         courseTable.putItem(course);
         return findAll();
     }
 
-    public Course get(String name) {
-        Key partitionKey = Key.builder().partitionValue(name).build();
+    public Course get(String name, Integer edition) {
+        Key partitionKey = Key.builder().partitionValue(name).sortValue(edition).build();
         return courseTable.getItem(partitionKey);
     }
 
