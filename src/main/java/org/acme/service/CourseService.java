@@ -31,7 +31,7 @@ public class CourseService {
     }
 
     public List<Course> add(Course course) {
-        // This is just a dummy teacher, in a real application you could fetch the teacher from a teacher table, or create a new teacher in the json body of the request
+        // This is just an example teacher, in the real usage we could get a Person from another table or we could just send a new Person in the body of the request
         course.setTeacher(new Person(1L, "email@dasd.lol", "John", "Smith", "teacher", "jSmith", LocalDate.parse( "1990-02-12"), 0, "Never St., 123"));
 
         courseTable.putItem(course);
