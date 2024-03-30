@@ -5,9 +5,9 @@
 ### Instructions:
 1. Set up a Docker container with DynamoDB:
 ```shell script
-docker run -p 8000:8000 amazon/dynamodb-local
+docker run --publish 8000:8000 amazon/dynamodb-local:1.11.477 -jar DynamoDBLocal.jar -sharedDb
 ```
-You can add the -inMemory flag to run DynamoDB in memory.
+You can add the ```-inMemory``` flag to run DynamoDB in memory.
 
 2. Create a table using AWS CLI: 
 ```shell script
