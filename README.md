@@ -1,5 +1,6 @@
 # DynamoDB Enhanced Quarkus example
 
+This is just a simple and barebone example of a DynamoDb Enhanced implementation I needed for a project. I'll leave it open in case anyone finds particulartly helpful in any way.
 
 
 ### Instructions:
